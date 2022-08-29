@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,10 +10,120 @@
   </head>
   <body>
     <div class="container">
-      <header class="header"></header>
+      <header class="header">
+        <!-- Navigation -->
+        <nav class="nav">
+          <div class="nav__brand">
+            <h3 class="nav__logo-text">devfinder</h3>
+          </div>
+          <div class="nav__theme">
+            <span class="nav__theme-text">Light</span>
+            <img
+              class="nav__theme-icon"
+              src="./src/image/icon-sun.svg"
+              alt="Light Mode"
+            />
+          </div>
+        </nav>
+      </header>
       <main class="main">
-        <div class="search"></div>
-        <div class="search-result"></div>
+        <!-- Search Box -->
+        <div class="search">
+          <form class="search__form">
+            <div class="search__form-group">
+              <label>Search Github username...</label>
+              <img
+                class="search__form-icon"
+                src="./src/image/icon-search.svg"
+                alt="search"
+              />
+              <input
+                type="text"
+                class="search__form-control"
+                name="search"
+                placeholder="Search Github username..."
+              />
+              <button
+                class="search__form-btn btn btn--primary btn--rounded-sm"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Search Result -->
+        <div class="search-result">
+          <div class="search-result__left">
+            <img
+              class="search-result__photo"
+              src="./src/image/user.png"
+              alt="user name"
+            />
+          </div>
+          <div class="search-result__right grid-container">
+            <h2 class="search-result__name">The Octocat</h2>
+            <p class="search-result__username">@octocat</p>
+            <p class="search-result__timestamp">Joined 25 Jan 2011</p>
+            <p class="search-result__bio">This profile has no bio</p>
+            <div class="search-result__info-box">
+              <div class="search-result__info-item">
+                <p class="search-result__info-title">Repos</p>
+                <p class="search-result__info-number">8</p>
+              </div>
+              <div class="search-result__info-item">
+                <p class="search-result__info-title">Followers</p>
+                <p class="search-result__info-number">6734</p>
+              </div>
+              <div class="search-result__info-item">
+                <p class="search-result__info-title">Following</p>
+                <p class="search-result__info-number">9</p>
+              </div>
+            </div>
+            <p class="search-result__location">
+              <img
+                class="search-result__icon search-result__icon--location"
+                src="./src/image/icon-location.svg"
+                alt="user location"
+              />
+              San Francisco
+            </p>
+            <a
+              class="search-result__portfolio"
+              href="#"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              <img
+                class="search-result__icon search-result__icon--portfolio"
+                src="./src/image/icon-website.svg"
+                alt="user portfolio"
+              />
+              https://github.blog
+            </a>
+            <a
+              class="search-result__twitter"
+              href="#"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              <img
+                class="search-result__icon search-result__icon--twitter"
+                src="./src/image/icon-twitter.svg"
+                alt="user twitter"
+              />
+              Not available
+            </a>
+            <p class="search-result__company">
+              <img
+                class="search-result__icon search-result__icon--company"
+                src="./src/image/icon-company.svg"
+                alt="user company"
+              />
+              @github
+            </p>
+          </div>
+        </div>
       </main>
     </div>
   </body>
