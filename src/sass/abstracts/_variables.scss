@@ -1,0 +1,56 @@
+$colors: (
+  "primary-color": #141d2f,
+  "secondary-color": #1e2a47,
+  "tertiary-color": #0079ff,
+
+  "accent-100": #60abff,
+
+  "light": #ffffff,
+  "dark": #000000,
+);
+
+$weights: (
+  "thin": 300,
+  "default": 400,
+  "thick": 500,
+  "extra-thick": 600,
+  "bold": 700,
+  "extra-bold": 800,
+  "bolder": 900,
+);
+
+$font-sizes: (
+  "extra-small": 1.3rem,
+  "small": 1.4rem,
+  "medium": 1.6rem,
+  "extra-medium": 1.6rem,
+  "large": 1.8rem,
+  "extra-large": 2.2rem,
+);
+
+$font-family: (
+  "font-family-regular": (
+    "Space Mono",
+    monospace,
+  ),
+);
+
+$base-fonts: (
+  "font-size": 1.6rem,
+  "font-family":
+    map-get(
+      $map: $font-family,
+      $key: "font-family-regular",
+    ),
+  "line-height": 22px,
+  "font-weight": 400,
+  "color":
+    map-get(
+      $map: $colors,
+      $key: "light",
+    ),
+);
+
+$button-sizes: (
+  "medium": 3rem 3rem,
+);

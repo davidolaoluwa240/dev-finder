@@ -1,0 +1,25 @@
+{
+  "name": "devfinder",
+  "version": "1.0.0",
+  "description": "",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidolaoluwa240/devfinder.git"
+  },
+  "keywords": [],
+  "author": "Atebisun David",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidolaoluwa240/devfinder/issues"
+  },
+  "homepage": "https://github.com/davidolaoluwa240/devfinder#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0"
+  }
+}
