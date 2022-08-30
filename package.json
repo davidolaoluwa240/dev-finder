@@ -23,6 +23,7 @@
     "parcel": "^2.7.0"
   },
   "dependencies": {
-    "spinkit": "^2.0.1"
+    "core-js": "^3.25.0",
+    "regenerator-runtime": "^0.13.9"
   }
 }

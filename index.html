@@ -13,11 +13,6 @@
       referrerpolicy="no-referrer"
     />
     <!-- CSS  -->
-    <link
-      rel="stylesheet"
-      href="./node_modules/spinkit/spinkit.css"
-      type="text/css"
-    />
     <link rel="stylesheet" href="./src/sass/main.scss" type="text/css" />
     <title>Frontend Mentor | Github search user app</title>
     <!-- Script -->
@@ -49,7 +44,7 @@
       <main class="main">
         <!-- Search Box -->
         <div class="search">
-          <form class="search__form">
+          <form class="search__form" autocomplete="off">
             <label class="search__form-label">Search Github username...</label>
             <img
               class="search__form-icon"
@@ -61,7 +56,6 @@
               class="search__form-control"
               name="search"
               placeholder="Search Github username..."
-              autocomplete="off"
             />
             <button
               class="search__form-btn btn btn--md btn--primary btn--rounded-sm"
@@ -72,63 +66,7 @@
           </form>
         </div>
         <!-- Search Result -->
-        <div class="search-result">
-          <div class="search-result__left">
-            <img
-              class="search-result__photo"
-              src="./src/image/user.png"
-              alt="user name"
-            />
-          </div>
-          <div class="search-result__right">
-            <h2 class="search-result__name">The Octocat</h2>
-            <p class="search-result__username">@octocat</p>
-            <p class="search-result__timestamp">Joined 25 Jan 2011</p>
-            <p class="search-result__bio">This profile has no bio</p>
-            <div class="search-result__info-box">
-              <div class="search-result__info-item">
-                <p class="search-result__info-title">Repos</p>
-                <p class="search-result__info-number">8</p>
-              </div>
-              <div class="search-result__info-item">
-                <p class="search-result__info-title">Followers</p>
-                <p class="search-result__info-number">6734</p>
-              </div>
-              <div class="search-result__info-item">
-                <p class="search-result__info-title">Following</p>
-                <p class="search-result__info-number">9</p>
-              </div>
-            </div>
-            <a class="search-result__profile is-cursor-default">
-              <i
-                class="fa-solid fa-location-dot search-result__profile-icon"
-              ></i>
-              San Francisco
-            </a>
-            <a
-              class="search-result__profile"
-              href="#"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <i class="fa-solid fa-link search-result__profile-icon"></i>
-              https://github.blog
-            </a>
-            <a
-              class="search-result__profile"
-              href="#"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <i class="fa-brands fa-twitter search-result__profile-icon"></i>
-              Not available
-            </a>
-            <a class="search-result__profile is-cursor-default">
-              <i class="fa-solid fa-building search-result__profile-icon"></i>
-              @github
-            </a>
-          </div>
-        </div>
+        <div class="search-result"></div>
       </main>
     </div>
   </body>

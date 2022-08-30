@@ -1,18 +1,19 @@
 abstract class View {
   /**
+   * Responsible for returning the markup that will be rendered to the DOM
+   * @access protected
+   * @returns {string} Generated markup string
+   */
+  protected abstract generateMarkup(): string;
+  /**
+   * Parent Element where the content should be mounted
    * @access protected
    */
-  protected abstract generateMarkup(data: any): string;
+  protected abstract parentEl: HTMLElement;
   /**
    * @access protected
    */
-  protected data: any;
-
-  /**
-   * @constructor
-   * @param parentEl Parent Element where content should be rendered
-   */
-  constructor(protected parentEl: HTMLElement) {}
+  protected abstract data: any;
 
   /**
    * Render any data to the DOM using the parent element
@@ -21,7 +22,7 @@ abstract class View {
    */
   public render(data: any): void {
     this.data = data;
-    const markup = this.generateMarkup(data);
+    const markup = this.generateMarkup();
     this.clear();
     this.parentEl.insertAdjacentHTML("afterbegin", markup);
   }
