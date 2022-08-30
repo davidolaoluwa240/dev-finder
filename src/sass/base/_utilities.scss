@@ -56,4 +56,21 @@
   height: 100%;
   margin-left: auto !important;
   margin-right: auto !important;
+
+  @include respond(tab-port) {
+    max-width: 570px;
+  }
+
+  @include respond(phone) {
+    max-width: 93%;
+  }
+}
+
+// CURSOR
+.is-cursor-pointer {
+  cursor: pointer !important;
+}
+
+.is-cursor-default {
+  cursor: default !important;
 }

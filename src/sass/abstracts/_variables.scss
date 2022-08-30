@@ -4,6 +4,11 @@ $colors: (
   "tertiary-color": #0079ff,
 
   "accent-100": #60abff,
+  "accent-200": #4b6a9b,
+  "accent-300": #2b3442,
+
+  "grey-light-100": #fefefe,
+  "grey-light-200": #f6f8ff,
 
   "light": #ffffff,
   "dark": #000000,
@@ -47,10 +52,10 @@ $base-fonts: (
   "color":
     map-get(
       $map: $colors,
-      $key: "light",
+      $key: "accent-200",
     ),
 );
 
 $button-sizes: (
-  "medium": 3rem 3rem,
+  "medium": 1.4rem 2.8rem,
 );

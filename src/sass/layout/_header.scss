@@ -1,0 +1,7 @@
+.header {
+  margin-top: 5rem;
+
+  @include respond(phone) {
+    margin-top: 3rem;
+  }
+}

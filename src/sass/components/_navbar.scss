@@ -1,0 +1,38 @@
+.nav {
+  @include flex-box(space-between, center);
+
+  &__logo-text {
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  &__theme {
+    @include flex-box($align-items: center);
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__theme-icon {
+    margin-left: 1.5rem;
+  }
+
+  &__theme-icon--dark {
+    display: none;
+  }
+}
+
+// Dark Mode
+@include dark-mode {
+  .nav {
+    &__theme-icon--light {
+      display: none;
+    }
+
+    &__theme-icon--dark {
+      display: block;
+    }
+  }
+}

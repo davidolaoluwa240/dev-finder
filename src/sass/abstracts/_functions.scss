@@ -3,11 +3,6 @@
   @return map-get($map: $colors, $key: $color-name);
 }
 
-// GET FONT FAMILY
-@function getFontFamily($font-family-name) {
-  @return map-get($map: $font-family, $key: $font-family-name);
-}
-
 // GET BASE FONTS
 @function getBaseFont($name) {
   @return map-get($map: $base-fonts, $key: $name);
@@ -17,4 +12,3 @@
 @function getButtonSize($button-size) {
   @return map-get($map: $button-sizes, $key: $button-size);
 }
-

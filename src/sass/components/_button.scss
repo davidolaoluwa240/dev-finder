@@ -1,0 +1,29 @@
+.btn {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s linear;
+
+  &:focus {
+    outline: none;
+  }
+
+  // Button Size
+  &--md {
+    padding: getButtonSize("medium");
+  }
+
+  // Button Radius
+  &--rounded-sm {
+    border-radius: 10px;
+  }
+
+  //   Button Color
+  &--primary {
+    background: getColor("tertiary-color");
+
+    &:hover {
+      background: getColor("accent-100");
+    }
+  }
+}

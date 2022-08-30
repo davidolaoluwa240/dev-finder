@@ -21,5 +21,8 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "spinkit": "^2.0.1"
   }
 }

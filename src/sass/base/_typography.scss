@@ -4,6 +4,14 @@ body {
   font-weight: getBaseFont("font-weight");
   line-height: getBaseFont("line-height");
   color: getBaseFont("color");
-  background-color: getColor("primary-color");
-  min-height: 100vh;
+  background-color: getColor("grey-light-200");
+  width: 100vw;
+}
+
+// Dark Mode
+@include dark-mode {
+  body {
+    color: getColor("light");
+    background-color: getColor("primary-color");
+  }
 }

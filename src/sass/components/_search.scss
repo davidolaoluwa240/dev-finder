@@ -1,0 +1,65 @@
+.search {
+  margin-top: 4rem;
+
+  &__form {
+    padding: 0.7rem 1.5rem 0.7rem 2.6rem;
+    box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+    background-color: getColor("grey-light-100");
+    border-radius: 15px;
+    @include flex-box($align-items: center);
+
+    @media screen and (max-width: 379px) {
+      padding: 1rem 1.5rem 1.2rem 1.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__form-label {
+    position: fixed;
+    right: 999999px;
+  }
+
+  &__form-icon {
+    width: 2rem;
+  }
+
+  &__form-control {
+    flex-grow: 1;
+    border: none;
+    padding: 2rem;
+    font: inherit;
+    color: inherit;
+    font-size: 1.8rem;
+    display: block;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: inherit;
+    }
+  }
+
+  &__form-btn {
+    color: getColor("light");
+    font-weight: 700;
+
+    @media screen and (max-width: 379px) {
+      width: 100%;
+    }
+  }
+}
+
+// Dark Mode
+@include dark-mode {
+  .search {
+    &__form {
+      background-color: getColor("secondary-color");
+    }
+
+    &__form-control {
+      background-color: inherit;
+    }
+  }
+}

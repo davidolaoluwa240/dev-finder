@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- CSS  -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/spinkit/spinkit.css"
+      type="text/css"
+    />
     <link rel="stylesheet" href="./src/sass/main.scss" type="text/css" />
     <title>Frontend Mentor | Github search user app</title>
+    <!-- Script -->
     <script type="module" defer src="./src/build/controller.ts"></script>
   </head>
   <body>
@@ -17,11 +32,16 @@
             <h3 class="nav__logo-text">devfinder</h3>
           </div>
           <div class="nav__theme">
-            <span class="nav__theme-text">Light</span>
+            <span class="nav__theme-text">Dark</span>
             <img
-              class="nav__theme-icon"
-              src="./src/image/icon-sun.svg"
+              class="nav__theme-icon nav__theme-icon--light"
+              src="./src/image/icon-moon.svg"
               alt="Light Mode"
+            />
+            <img
+              class="nav__theme-icon nav__theme-icon--dark"
+              src="./src/image/icon-sun.svg"
+              alt="Dark Mode"
             />
           </div>
         </nav>
@@ -30,26 +50,25 @@
         <!-- Search Box -->
         <div class="search">
           <form class="search__form">
-            <div class="search__form-group">
-              <label>Search Github username...</label>
-              <img
-                class="search__form-icon"
-                src="./src/image/icon-search.svg"
-                alt="search"
-              />
-              <input
-                type="text"
-                class="search__form-control"
-                name="search"
-                placeholder="Search Github username..."
-              />
-              <button
-                class="search__form-btn btn btn--primary btn--rounded-sm"
-                type="submit"
-              >
-                Search
-              </button>
-            </div>
+            <label class="search__form-label">Search Github username...</label>
+            <img
+              class="search__form-icon"
+              src="./src/image/icon-search.svg"
+              alt="search"
+            />
+            <input
+              type="text"
+              class="search__form-control"
+              name="search"
+              placeholder="Search Github username..."
+              autocomplete="off"
+            />
+            <button
+              class="search__form-btn btn btn--md btn--primary btn--rounded-sm"
+              type="submit"
+            >
+              Search
+            </button>
           </form>
         </div>
         <!-- Search Result -->
@@ -61,7 +80,7 @@
               alt="user name"
             />
           </div>
-          <div class="search-result__right grid-container">
+          <div class="search-result__right">
             <h2 class="search-result__name">The Octocat</h2>
             <p class="search-result__username">@octocat</p>
             <p class="search-result__timestamp">Joined 25 Jan 2011</p>
@@ -80,48 +99,34 @@
                 <p class="search-result__info-number">9</p>
               </div>
             </div>
-            <p class="search-result__location">
-              <img
-                class="search-result__icon search-result__icon--location"
-                src="./src/image/icon-location.svg"
-                alt="user location"
-              />
+            <a class="search-result__profile is-cursor-default">
+              <i
+                class="fa-solid fa-location-dot search-result__profile-icon"
+              ></i>
               San Francisco
-            </p>
+            </a>
             <a
-              class="search-result__portfolio"
+              class="search-result__profile"
               href="#"
               rel="noreferrer noopener"
               target="_blank"
             >
-              <img
-                class="search-result__icon search-result__icon--portfolio"
-                src="./src/image/icon-website.svg"
-                alt="user portfolio"
-              />
+              <i class="fa-solid fa-link search-result__profile-icon"></i>
               https://github.blog
             </a>
             <a
-              class="search-result__twitter"
+              class="search-result__profile"
               href="#"
               rel="noreferrer noopener"
               target="_blank"
             >
-              <img
-                class="search-result__icon search-result__icon--twitter"
-                src="./src/image/icon-twitter.svg"
-                alt="user twitter"
-              />
+              <i class="fa-brands fa-twitter search-result__profile-icon"></i>
               Not available
             </a>
-            <p class="search-result__company">
-              <img
-                class="search-result__icon search-result__icon--company"
-                src="./src/image/icon-company.svg"
-                alt="user company"
-              />
+            <a class="search-result__profile is-cursor-default">
+              <i class="fa-solid fa-building search-result__profile-icon"></i>
               @github
-            </p>
+            </a>
           </div>
         </div>
       </main>
