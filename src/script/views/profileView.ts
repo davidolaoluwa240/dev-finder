@@ -45,6 +45,7 @@ class ProfileView extends View<ProfileTransformer> {
               this.data.username ? this.data.username : "octocat"
             }</p>
             <p class="search-result__timestamp">Joined ${dateFormatter(
+              undefined,
               this.data.createdAt
             )}</p>
             <p class="search-result__bio">${
