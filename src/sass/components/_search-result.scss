@@ -11,7 +11,8 @@
     display: block;
   }
 
-  &__loading {
+  &__loading,
+  &__error {
     width: 100%;
   }
 

@@ -5,6 +5,12 @@ import "regenerator-runtime/runtime";
 // Model
 import * as Model from "./model";
 
+// Interface
+import { ProfileTransformer } from "./interface/profile.interface";
+
+// Helpers
+import { catchAsync } from "./helper";
+
 // Views
 import themeView from "./views/themeView";
 import searchView from "./views/searchView";
@@ -12,34 +18,33 @@ import profileView from "./views/profileView";
 
 /**
  * Controller for theming
- * @returns {undefined} void
  */
 const controlTheme = function (): void {
   themeView.render();
 };
 
 /**
- * Controller For Profile
- * @param searchTerm Profile to be search for
- * @returns {undefined} void
+ * Controller for profile
  */
-const controlProfile = async function (searchTerm: string): Promise<any> {
-  // 1) Render Loading Spinner
+const controlProfile = catchAsync(async function (): Promise<void> {
+  // 1) Get Search Term
+  const searchTerm = searchView.searchTerm;
+
+  // 2) Render Loading Spinner
   profileView.renderSpinner();
 
-  // 2) Fetch Profile
+  // 3) Fetch Profile
   await Model.fetchGithubProfile(searchTerm);
 
-  // 3) Render Fetched Profile
-  profileView.render(Model.state.search.result);
+  // 4) Render Fetched Profile
+  profileView.render(Model.state.search.result as ProfileTransformer);
 
-  // 4) Clear The Input Value
-  searchView.clear();
-};
+  // 5) Clear The Input Value
+  searchView.clearInput();
+}, profileView.renderError.bind(profileView));
 
 /**
  * Called when the application is loaded
- * @returns {undefined} void
  */
 const init = function (): void {
   themeView.addHandlerClick(controlTheme);

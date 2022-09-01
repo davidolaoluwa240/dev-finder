@@ -1,20 +1,18 @@
+// View
+import View from "./View";
+
 /**
  * @class
  */
-class ThemeView {
-  /**
-   * @access protected
-   */
-  protected data = "light";
-  /**
-   * @access protected
-   */
-  protected parentEl = document.querySelector(".nav__theme") as HTMLElement;
+class ThemeView extends View<string> {
+  constructor() {
+    super(document.querySelector(".nav__theme") as HTMLElement);
+    this.data = "light";
+  }
 
   /**
    * Publisher that register an event and call the subscriber/handler function when the event happens
-   * @param handler Called when click event happens on the parent element
-   * @returns {undefind} void
+   * @param handler Handler to be called when click event happens on the parent element
    */
   public addHandlerClick(handler: () => void): void {
     this.parentEl.addEventListener("click", handler);
@@ -22,7 +20,6 @@ class ThemeView {
 
   /**
    * Perform toggling of theme, changing of theme button text and updating of page theme
-   * @returns {undefind} void
    */
   public render(): void {
     this.toggleTheme();
@@ -32,7 +29,6 @@ class ThemeView {
 
   /**
    * Toggle theme
-   * @returns {undefined} void
    * @access private
    */
   private toggleTheme(): void {
@@ -40,27 +36,31 @@ class ThemeView {
   }
 
   /**
-   * Update theme button text base on current theming value
-   * @returns {undefined} void
+   * Update theme button text base on current theme value
    * @access private
    */
   private updateThemeText(): void {
-    const themeTextEl: HTMLElement = this.parentEl.querySelector(
-      ".nav__theme-text"
-    ) as HTMLElement;
-    themeTextEl.textContent = this.data;
+    (
+      this.parentEl.querySelector(".nav__theme-text") as HTMLElement
+    ).textContent = this.data;
   }
 
   /**
    * Update page theme
-   * @returns {undefined} void
    * @access private
    */
   private updatePageTheme(): void {
-    const documentEl: HTMLElement = this.parentEl.closest(
-      "html"
-    ) as HTMLElement;
-    documentEl?.setAttribute("data-theme", this.data);
+    (this.parentEl.closest("html") as HTMLElement)?.setAttribute(
+      "data-theme",
+      this.data
+    );
+  }
+
+  /**
+   * @ignore
+   */
+  protected generateMarkup(): string {
+    throw new Error("Method should not be used");
   }
 }
 

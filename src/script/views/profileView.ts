@@ -2,7 +2,7 @@
 import View from "./View";
 
 // Interface
-import { Profile } from "../interface/interface";
+import { ProfileTransformer } from "../interface/profile.interface";
 
 // Assets
 import userPlaceholderImage from "url:../../image/user.png";
@@ -10,19 +10,17 @@ import userPlaceholderImage from "url:../../image/user.png";
 /**
  * @class
  */
-class ProfileView extends View {
-  protected parentEl = document.querySelector(".search-result") as HTMLElement;
-  protected data: Profile;
+class ProfileView extends View<ProfileTransformer> {
+  constructor() {
+    super(document.querySelector(".search-result") as HTMLElement);
+  }
 
   /**
    * Publisher function that register an event and call the callback function when it happens
    * @param handler Handler to be called on page load
-   * @returns {undefind} void
    */
-  addHandlerLoad(handler: (searchTerm: string) => void): void {
-    document.addEventListener("DOMContentLoaded", function () {
-      handler("");
-    });
+  addHandlerLoad(handler: () => void): void {
+    document.addEventListener("DOMContentLoaded", handler);
   }
 
   protected generateMarkup(): string {

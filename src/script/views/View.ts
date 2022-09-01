@@ -1,26 +1,25 @@
-abstract class View {
+/**
+ * @abstract
+ */
+abstract class View<T> {
   /**
    * Responsible for returning the markup that will be rendered to the DOM
    * @access protected
-   * @returns {string} Generated markup string
    */
   protected abstract generateMarkup(): string;
   /**
-   * Parent Element where the content should be mounted
+   * View data
    * @access protected
    */
-  protected abstract parentEl: HTMLElement;
-  /**
-   * @access protected
-   */
-  protected abstract data: any;
+  protected data: T;
+
+  constructor(protected parentEl: HTMLElement) {}
 
   /**
    * Render any data to the DOM using the parent element
    * @param data Data that should be rendered to the DOM
-   * @returns {undefined} void
    */
-  public render(data: any): void {
+  public render(data: T): void {
     this.data = data;
     const markup = this.generateMarkup();
     this.clear();
@@ -29,7 +28,7 @@ abstract class View {
 
   /**
    * Clear everything inside the parent element
-   * @returns {undefined} void
+   * @access private
    */
   private clear(): void {
     this.parentEl.innerHTML = "";
@@ -38,7 +37,6 @@ abstract class View {
   /**
    * Render any error to the DOM
    * @param message Error message to be rendered to the DOM
-   * @returns {undefined} void
    */
   public renderError(message: string): void {
     const markup = `
@@ -54,7 +52,6 @@ abstract class View {
 
   /**
    * Render loading spinner to the DOM
-   * @returns {undefined} void
    */
   public renderSpinner(): void {
     const markup = `
