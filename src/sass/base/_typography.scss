@@ -6,6 +6,7 @@ body {
   color: getBaseFont("color");
   background-color: getColor("grey-light-200");
   width: 100vw;
+  overflow-x: hidden;
 }
 
 // Dark Mode
