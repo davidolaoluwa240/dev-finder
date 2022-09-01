@@ -46,7 +46,7 @@ class ProfileView extends View<ProfileTransformer> {
             }</p>
             <p class="search-result__timestamp">Joined ${dateFormatter(
               undefined,
-              this.data.createdAt
+              this.data.createdAt || new Date()
             )}</p>
             <p class="search-result__bio">${
               this.data.bio ? this.data.bio : "This profile has no bio"
