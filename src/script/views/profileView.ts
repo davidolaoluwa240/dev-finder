@@ -4,6 +4,9 @@ import View from "./View";
 // Interface
 import { ProfileTransformer } from "../interface/profile.interface";
 
+// Helpers
+import { dateFormatter } from "../helper";
+
 // Assets
 import userPlaceholderImage from "url:../../image/user.png";
 
@@ -41,7 +44,9 @@ class ProfileView extends View<ProfileTransformer> {
             <p class="search-result__username">@${
               this.data.username ? this.data.username : "octocat"
             }</p>
-            <p class="search-result__timestamp">Joined 25 Jan 2011</p>
+            <p class="search-result__timestamp">Joined ${dateFormatter(
+              this.data.createdAt
+            )}</p>
             <p class="search-result__bio">${
               this.data.bio ? this.data.bio : "This profile has no bio"
             }</p>
