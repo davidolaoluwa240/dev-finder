@@ -34,7 +34,7 @@ class ProfileView extends View<ProfileTransformer> {
               src="${
                 this.data.avatarUrl ? this.data.avatarUrl : userPlaceholderImage
               }"
-              alt="${this.data.username}"
+              alt="${this.data.login}"
             />
           </div>
           <div class="search-result__right">
@@ -42,11 +42,11 @@ class ProfileView extends View<ProfileTransformer> {
               this.data.name ? this.data.name : "The Octocat"
             }</h2>
             <p class="search-result__username">@${
-              this.data.username ? this.data.username : "octocat"
+              this.data.login ? this.data.login : "octocat"
             }</p>
             <p class="search-result__timestamp">Joined ${dateFormatter(
               undefined,
-              this.data.createdAt || new Date()
+              this.data.createdAt ? new Date(this.data.createdAt) : new Date()
             )}</p>
             <p class="search-result__bio">${
               this.data.bio ? this.data.bio : "This profile has no bio"
@@ -79,12 +79,12 @@ class ProfileView extends View<ProfileTransformer> {
             </a>
             <a
               class="search-result__profile"
-              href="${this.data.blogUrl ? this.data.blogUrl : "#"}"
+              href="${this.data.blog ? this.data.blog : "#"}"
               rel="noreferrer noopener"
               target="_blank"
             >
               <i class="fa-solid fa-link search-result__profile-icon"></i>
-              ${this.data.blogUrl ? this.data.blogUrl : "https://github.blog"}
+              ${this.data.blog ? this.data.blog : "https://github.blog"}
             </a>
             <a
               class="search-result__profile"

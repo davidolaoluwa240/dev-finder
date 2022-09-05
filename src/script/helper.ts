@@ -1,84 +1,65 @@
-// Config
-import { FETCH_TIMEOUT_SEC } from "./config";
+// Modules
+import axios from "axios";
 
-// Interface
-import { ProfileTransformer, Profile } from "./interface/profile.interface";
-
-/**
- * Fetch Timeout Promise
- * @param sec Number of seconds until the promise is rejected
- */
-const timeout = function (sec: number): Promise<any> {
-  return new Promise(function (_, reject) {
-    setTimeout(
-      reject.bind(null, new Error("Request took too long. Please try again")),
-      sec * 1000
-    );
-  });
-};
+// Custom Types
+type Callback = (...data) => Promise<void>;
+type ErrorCallback = (message: string) => void;
 
 /**
- * Invoke an async function and handle any async error
+ * Invoke an async function and handle any async error or Re-throw any async error
  * @param cb Async function to be invoked
  * @param errcb Error callback function
  */
-const catchAsync = function (cb, errcb: (message: string) => void) {
-  return async function (...data) {
+const catchAsync = function (
+  cb: Callback,
+  errcb?: ErrorCallback
+): (...data) => Promise<void> {
+  return async function (...data): Promise<void> {
     try {
-      return await cb(...data);
+      await cb(...data);
     } catch (err) {
-      errcb(`${err.message}💥💥💥`);
+      if (!errcb) throw err;
+      if (axios.isAxiosError(err)) {
+        if (err.response) {
+          errcb(`${(err.response.data as { message: string }).message}💥💥💥`);
+        }
+      } else {
+        errcb(`${err.message}💥💥💥`);
+      }
     }
   };
 };
 
 /**
- * Invoke an async function and re-throw any error that occur inside the async function
- * @param cb Async function to be invoked
- */
-const catchAsyncThrow = function (cb) {
-  return async function (...data): Promise<any> {
-    try {
-      return await cb(...data);
-    } catch (err) {
-      throw err;
-    }
-  };
-};
-
-/**
- * Custom Fetch Hook
+ * Custom Fetch
  * @param url Url to make request to
  */
-const getJSON = catchAsyncThrow(async function (url: string): Promise<any> {
-  const response = await Promise.race([fetch(url), timeout(FETCH_TIMEOUT_SEC)]);
-  if (response.status === 500)
-    throw new Error("Something went wrong. Please try again later");
-  if (response.status === 404)
-    throw new Error("Could get the resource you are trying to fetch");
-  const data = await response.json();
-  return data;
-});
+const getJSON = async function <T>(url: string): Promise<T> {
+  const response = await axios.get<T>(url, {
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.data;
+};
 
 /**
- * Transform Fetched Profile Data
- * @param profile Fetched User Profile Data
+ * Transform Fetched Data Property To CamelCase
+ * @param data Data To Transform
  */
-const profileTransformer = function (profile: Profile): ProfileTransformer {
-  return {
-    name: profile.name,
-    avatarUrl: profile.avatar_url,
-    createdAt: new Date(profile.created_at),
-    company: profile.company,
-    followers: profile.followers,
-    following: profile.following,
-    twitterUsername: profile.twitter_username,
-    bio: profile.bio,
-    blogUrl: profile.blog,
-    publicRepos: profile.public_repos,
-    location: profile.location,
-    username: profile.login,
-  };
+const transformPropertyToCamelCase = function <
+  T extends Object,
+  R extends Object
+>(data: T): R {
+  const transformedValue = Object.entries(data).map(([key, value]) => {
+    const newKey = key
+      .split("_")
+      .map((word: string, index: number): string => {
+        if (index === 0) return word;
+        else return word[0].toUpperCase() + word.slice(1);
+      })
+      .join("");
+    return [newKey, value];
+  });
+  return Object.fromEntries(transformedValue);
 };
 
 /**
@@ -87,7 +68,7 @@ const profileTransformer = function (profile: Profile): ProfileTransformer {
  * @param date Date object to be formatted
  * @example dateFormatter("en-US", new Date())
  */
-const dateFormatter = function (locale: string = "en-GB", date: Date): string {
+const dateFormatter = function (locale = "en-GB", date: Date): string {
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
@@ -95,10 +76,4 @@ const dateFormatter = function (locale: string = "en-GB", date: Date): string {
   }).format(date);
 };
 
-export {
-  getJSON,
-  profileTransformer,
-  dateFormatter,
-  catchAsync,
-  catchAsyncThrow,
-};
+export { getJSON, transformPropertyToCamelCase, dateFormatter, catchAsync };

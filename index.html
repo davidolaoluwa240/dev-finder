@@ -26,6 +26,7 @@
   </head>
   <body>
     <div class="container">
+      <!-- Header -->
       <header class="header">
         <!-- Navigation -->
         <nav class="nav">
@@ -47,17 +48,19 @@
           </div>
         </nav>
       </header>
+      <!-- Main -->
       <main class="main">
         <!-- Search Box -->
         <div class="search">
           <form class="search__form" autocomplete="off">
-            <label class="search__form-label">Search Github username...</label>
+            <label for="search" class="search__form-label">Search Github username...</label>
             <img
               class="search__form-icon"
               src="./src/image/icon-search.svg"
               alt="search"
             />
             <input
+            id="search"
               type="text"
               class="search__form-control"
               name="search"

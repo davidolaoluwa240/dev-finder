@@ -10,10 +10,10 @@ export interface ProfileTransformer {
   following: number;
   twitterUsername: string;
   bio: string;
-  blogUrl: string;
+  blog: string;
   publicRepos: number;
   location: string;
-  username: string;
+  login: string;
 }
 
 /**
