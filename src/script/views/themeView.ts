@@ -22,7 +22,7 @@ class ThemeView extends View<string> {
    * Perform toggling of theme, changing of theme button text and updating of page theme
    */
   public render(): void {
-    this.toggleTheme();
+    this.data = this.toggleTheme();
     this.updateThemeText();
     this.updatePageTheme();
   }
@@ -31,18 +31,18 @@ class ThemeView extends View<string> {
    * Toggle theme
    * @access private
    */
-  private toggleTheme(): void {
-    this.data = this.data === "light" ? "dark" : "light";
+  private toggleTheme(): string {
+    return this.data === "light" ? "dark" : "light";
   }
 
   /**
-   * Update theme button text base on current theme value
+   * Update theme button text
    * @access private
    */
   private updateThemeText(): void {
     (
       this.parentEl.querySelector(".nav__theme-text") as HTMLElement
-    ).textContent = this.data;
+    ).textContent = this.toggleTheme();
   }
 
   /**

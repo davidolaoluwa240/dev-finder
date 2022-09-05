@@ -1,5 +1,5 @@
 /**
- * Transformed Profile Data Interface
+ * Transformed Profile Interface
  */
 export interface ProfileTransformer {
   name: string;
@@ -17,7 +17,7 @@ export interface ProfileTransformer {
 }
 
 /**
- * Fetched Github Profile Interface
+ * Profile Interface
  */
 export interface Profile {
   name: string;
