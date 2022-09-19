@@ -2,13 +2,10 @@
 import View from "./View";
 
 // Interface
-import { ProfileTransformer } from "../interface/profile.interface";
+import { ProfileTransformer } from "../interface/profile";
 
 // Helpers
 import { dateFormatter } from "../helper";
-
-// Assets
-import userPlaceholderImage from "url:../../image/user.png";
 
 /**
  * @class
@@ -19,7 +16,7 @@ class ProfileView extends View<ProfileTransformer> {
   }
 
   /**
-   * Publisher function that register an event and call the callback function when it happens
+   * Publisher Function
    * @param handler Handler to be called on page load
    */
   addHandlerLoad(handler: () => void): void {
@@ -31,43 +28,33 @@ class ProfileView extends View<ProfileTransformer> {
         <div class="search-result__left">
             <img
               class="search-result__photo"
-              src="${
-                this.data.avatarUrl ? this.data.avatarUrl : userPlaceholderImage
-              }"
+              src="${this.data.avatarUrl}"
               alt="${this.data.login}"
             />
           </div>
           <div class="search-result__right">
-            <h2 class="search-result__name">${
-              this.data.name ? this.data.name : "The Octocat"
-            }</h2>
-            <p class="search-result__username">@${
-              this.data.login ? this.data.login : "octocat"
-            }</p>
+            <h2 class="search-result__name">${this.data.name}</h2>
+            <p class="search-result__username">@${this.data.login}</p>
             <p class="search-result__timestamp">Joined ${dateFormatter(
               undefined,
-              this.data.createdAt ? new Date(this.data.createdAt) : new Date()
+              new Date(this.data.createdAt)
             )}</p>
-            <p class="search-result__bio">${
-              this.data.bio ? this.data.bio : "This profile has no bio"
-            }</p>
+            <p class="search-result__bio">${this.data.bio}</p>
             <div class="search-result__info-box">
               <div class="search-result__info-item">
                 <p class="search-result__info-title">Repos</p>
                 <p class="search-result__info-number">${
-                  this.data.publicRepos ? this.data.publicRepos : 8
+                  this.data.publicRepos
                 }</p>
               </div>
               <div class="search-result__info-item">
                 <p class="search-result__info-title">Followers</p>
-                <p class="search-result__info-number">${
-                  this.data.followers ? this.data.followers : 6734
-                }</p>
+                <p class="search-result__info-number">${this.data.followers}</p>
               </div>
               <div class="search-result__info-item">
                 <p class="search-result__info-title">Following</p>
                 <p class="search-result__info-number">
-                ${this.data.following ? this.data.following : 9}
+                ${this.data.following}
                 </p>
               </div>
             </div>
@@ -75,37 +62,29 @@ class ProfileView extends View<ProfileTransformer> {
               <i
                 class="fa-solid fa-location-dot search-result__profile-icon"
               ></i>
-              ${this.data.location ? this.data.location : "San Francisco"}
+              ${this.data.location}
             </a>
             <a
               class="search-result__profile"
-              href="${this.data.blog ? this.data.blog : "#"}"
+              href="${this.data.blog}"
               rel="noreferrer noopener"
               target="_blank"
             >
               <i class="fa-solid fa-link search-result__profile-icon"></i>
-              ${this.data.blog ? this.data.blog : "https://github.blog"}
+              ${this.data.blog}
             </a>
             <a
               class="search-result__profile"
-              href=" ${
-                this.data.twitterUsername
-                  ? `https://twitter.com/${this.data.twitterUsername}`
-                  : "#"
-              }"
+              href=" ${`https://twitter.com/${this.data.twitterUsername}`}"
               rel="noreferrer noopener"
               target="_blank"
             >
               <i class="fa-brands fa-twitter search-result__profile-icon"></i>
-                ${
-                  this.data.twitterUsername
-                    ? this.data.twitterUsername
-                    : "Not available"
-                }
+                ${this.data.twitterUsername}
             </a>
             <a class="search-result__profile is-cursor-default">
               <i class="fa-solid fa-building search-result__profile-icon"></i>
-              ${this.data.company ? this.data.company : "@github"}
+              ${this.data.company}
             </a>
           </div>
     `;
@@ -113,4 +92,4 @@ class ProfileView extends View<ProfileTransformer> {
   }
 }
 
-export default new ProfileView();
+export default ProfileView;

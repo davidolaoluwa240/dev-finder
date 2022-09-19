@@ -11,7 +11,7 @@ class ThemeView extends View<string> {
   }
 
   /**
-   * Publisher that register an event and call the subscriber/handler function when the event happens
+   * Publisher Function
    * @param handler Handler to be called when click event happens on the parent element
    */
   public addHandlerClick(handler: () => void): void {
@@ -19,7 +19,7 @@ class ThemeView extends View<string> {
   }
 
   /**
-   * Perform toggling of theme, changing of theme button text and updating of page theme
+   * Perform Toggling Of Theme, Changing Of Theme Button Text And Updating Of Page Theme
    */
   public render(): void {
     this.data = this.toggleTheme();
@@ -28,7 +28,7 @@ class ThemeView extends View<string> {
   }
 
   /**
-   * Toggle theme
+   * Toggle Theme
    * @access private
    */
   private toggleTheme(): string {
@@ -36,32 +36,24 @@ class ThemeView extends View<string> {
   }
 
   /**
-   * Update theme button text
+   * Update Theme Button Text
    * @access private
    */
   private updateThemeText(): void {
-    (
-      this.parentEl.querySelector(".nav__theme-text") as HTMLElement
-    ).textContent = this.toggleTheme();
+    const themeText = this.parentEl.querySelector(
+      ".nav__theme-text"
+    ) as HTMLElement;
+    themeText.textContent = this.toggleTheme();
   }
 
   /**
-   * Update page theme
+   * Update Page Theme
    * @access private
    */
   private updatePageTheme(): void {
-    (this.parentEl.closest("html") as HTMLElement)?.setAttribute(
-      "data-theme",
-      this.data
-    );
-  }
-
-  /**
-   * @ignore
-   */
-  protected generateMarkup(): string {
-    throw new Error("Method should not be used");
+    const rootEl = this.parentEl.closest("html") as HTMLElement;
+    rootEl?.setAttribute("data-theme", this.data);
   }
 }
 
-export default new ThemeView();
+export default ThemeView;

@@ -4,7 +4,7 @@
 export interface ProfileTransformer {
   name: string;
   avatarUrl: string;
-  createdAt: Date;
+  createdAt: string;
   company: string;
   followers: number;
   following: number;
@@ -22,7 +22,7 @@ export interface ProfileTransformer {
 export interface Profile {
   name: string;
   avatar_url: string;
-  created_at: Date;
+  created_at: string;
   company: string;
   followers: number;
   following: number;

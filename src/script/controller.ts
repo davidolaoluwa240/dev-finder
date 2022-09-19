@@ -6,45 +6,50 @@ import "regenerator-runtime/runtime";
 import * as Model from "./model";
 
 // Interface
-import { ProfileTransformer } from "./interface/profile.interface";
+import { ProfileTransformer } from "./interface/profile";
 
 // Helpers
 import { catchAsync } from "./helper";
 
 // Views
-import themeView from "./views/themeView";
-import searchView from "./views/searchView";
-import profileView from "./views/profileView";
+import ThemeView from "./views/ThemeView";
+import SearchView from "./views/SearchView";
+import ProfileView from "./views/ProfileView";
+
+// Views Instance
+const themeView = new ThemeView();
+const searchView = new SearchView();
+const profileView = new ProfileView();
 
 /**
- * Controller for theming
+ * Controller For Theming
  */
 const controlTheme = function (): void {
   themeView.render();
 };
 
 /**
- * Controller for profile
+ * Controller For Profile
  */
 const controlProfile = catchAsync(async function (): Promise<void> {
-  // 1) Get Search Term
+  // 1) Get search term
   const searchTerm = searchView.searchTerm;
 
-  // 2) Render Loading Spinner
+  // 2) Render loading spinner
   profileView.renderSpinner();
 
-  // 3) Fetch Profile
-  await Model.fetchGithubProfile(searchTerm);
+  // 3) Fetch profile
+  await Model.fetchGithubProfile.call(Model.state, searchTerm);
 
-  // 4) Render Fetched Profile
+  // 4) Render fetched profile
   profileView.render(Model.state.search.result as ProfileTransformer);
 
-  // 5) Clear The Input Value
+  // 5) Clear the input value
   searchView.clearInput();
 }, profileView.renderError.bind(profileView));
 
 /**
- * Called when the application is loaded
+ * Main
  */
 const init = function (): void {
   themeView.addHandlerClick(controlTheme);
@@ -52,5 +57,5 @@ const init = function (): void {
   profileView.addHandlerLoad(controlProfile);
 };
 
-// Bootstrap application
+// Bootstrap Application
 init();

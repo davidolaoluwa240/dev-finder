@@ -10,15 +10,15 @@ class SearchView extends View<string> {
   }
 
   /**
-   * Get search term
+   * Get Search Term
    */
   get searchTerm(): string {
     return this.data;
   }
 
   /**
-   * Publisher function that register an event and call the Subscriber when it happens
-   * @param handler Function to be called when submit event happen on the parent element
+   * Publisher Function
+   * @param handler Handler to be called when submit event happen on the parent element
    */
   public addHandlerFormSubmit(handler: () => void): void {
     this.parentEl.addEventListener("submit", (e) => {
@@ -35,17 +35,11 @@ class SearchView extends View<string> {
    * Clear input value
    */
   public clearInput(): void {
-    (
-      this.parentEl.querySelector(".search__form-control") as HTMLInputElement
-    ).value = "";
-  }
-
-  /**
-   * @ignore
-   */
-  protected generateMarkup(): string {
-    throw new Error("Method should not be used");
+    const searchControl = this.parentEl.querySelector(
+      ".search__form-control"
+    ) as HTMLInputElement;
+    searchControl.value = "";
   }
 }
 
-export default new SearchView();
+export default SearchView;

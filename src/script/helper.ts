@@ -1,31 +1,23 @@
 // Modules
 import axios from "axios";
 
-// Custom Types
-type Callback = (...data) => Promise<void>;
-type ErrorCallback = (message: string) => void;
+// Interfaces
+import { Callback, ErrorCallback } from "./interface/callback";
 
 /**
- * Invoke an async function and handle any async error or Re-throw any async error
+ * Catch Async Error By Calling The Error Callback
  * @param cb Async function to be invoked
  * @param errcb Error callback function
  */
 const catchAsync = function (
   cb: Callback,
   errcb?: ErrorCallback
-): (...data) => Promise<void> {
-  return async function (...data): Promise<void> {
+): (...data: any[]) => Promise<void> {
+  return async function (...data: any[]): Promise<void> {
     try {
       await cb(...data);
     } catch (err) {
-      if (!errcb) throw err;
-      if (axios.isAxiosError(err)) {
-        if (err.response) {
-          errcb(`${(err.response.data as { message: string }).message}💥💥💥`);
-        }
-      } else {
-        errcb(`${err.message}💥💥💥`);
-      }
+      errcb?.(`${err.message}💥💥💥`);
     }
   };
 };
@@ -35,15 +27,28 @@ const catchAsync = function (
  * @param url Url to make request to
  */
 const getJSON = async function <T>(url: string): Promise<T> {
-  const response = await axios.get<T>(url, {
-    headers: { "Content-Type": "application/json" },
-  });
-  return response.data;
+  try {
+    const response = await axios.get<T>(url, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      if (err.status === "404") {
+        throw new Error("User with the username do not exist");
+      }
+
+      if (err.status === "500") {
+        throw new Error("Something went wrong. Please try again later");
+      }
+    }
+    throw err;
+  }
 };
 
 /**
  * Transform Fetched Data Property To CamelCase
- * @param data Data To Transform
+ * @param data Data to transform
  */
 const transformPropertyToCamelCase = function <
   T extends Object,
@@ -63,12 +68,12 @@ const transformPropertyToCamelCase = function <
 };
 
 /**
- * Format any date to a country locale
+ * Format Any Date To A Country Locale
  * @param locale Country locale (Default: 'en-GB')
  * @param date Date object to be formatted
  * @example dateFormatter("en-US", new Date())
  */
-const dateFormatter = function (locale = "en-GB", date: Date): string {
+const dateFormatter = function (locale: string = "en-GB", date: Date): string {
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",

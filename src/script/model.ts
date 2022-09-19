@@ -1,19 +1,35 @@
 // Helpers
-import { getJSON, transformPropertyToCamelCase, catchAsync } from "./helper";
+import { getJSON, transformPropertyToCamelCase } from "./helper";
 
 // Configs
 import { GITHUB_URL } from "./config";
 
-// Interface
-import { Profile, ProfileTransformer } from "./interface/profile.interface";
+// Interfaces
+import { Profile, ProfileTransformer } from "./interface/profile";
+
+// Assets
+import userPlaceholderImage from "url:../image/user.png";
 
 /**
- * Application state
+ * Application State
  */
-const state = {
+const state: { search: { query: string; result: ProfileTransformer } } = {
   search: {
     query: "",
-    result: {},
+    result: {
+      avatarUrl: userPlaceholderImage,
+      login: "octocat",
+      name: "The Octocat",
+      createdAt: "2022-09-19T10:45:33.454Z",
+      bio: "This profile has no bio",
+      publicRepos: 8,
+      followers: 6734,
+      following: 9,
+      location: "San Francisco",
+      blog: "https://github.blog",
+      twitterUsername: "Not available",
+      company: "@github",
+    },
   },
 };
 
@@ -21,29 +37,27 @@ const state = {
  * Fetch User Github Profile
  * @param searchTerm Github username
  */
-const fetchGithubProfile = catchAsync(
-  async function (searchTerm: string): Promise<void> {
-    // 1) Update The Query State
-    this.search.query = searchTerm;
+const fetchGithubProfile = async function (searchTerm: string): Promise<void> {
+  // 1) Update the query state
+  this.search.query = searchTerm;
 
-    // 2) When There's No Search Term Then Return Early
-    if (!searchTerm) return;
+  // 2) When there's no search term then return early
+  if (!searchTerm) return;
 
-    // 3) Fetch User Github Profile
-    const response = await getJSON<Profile>(`${GITHUB_URL}${searchTerm}`);
+  // 3) Fetch user github profile
+  const response = await getJSON<Profile>(`${GITHUB_URL}/${searchTerm}`);
 
-    // 4) If Response Is Undefined Throw An Error
-    if (!response)
-      throw new Error(`User with the username ${searchTerm} do not exist`);
+  // 4) If response is undefined throw an error
+  if (!response)
+    throw new Error(`User with the username ${searchTerm} do not exist`);
 
-    // 5) Transform Fetched Data Property To CamelCase
-    const profile = transformPropertyToCamelCase<Profile, ProfileTransformer>(
-      response
-    );
+  // 5) Transform fetched data property to camelCase
+  const profile = transformPropertyToCamelCase<Profile, ProfileTransformer>(
+    response
+  );
 
-    // 6) Update Search Result State
-    this.search.result = profile;
-  }.bind(state)
-);
+  // 6) Update Search Result State
+  this.search.result = profile;
+};
 
 export { state, fetchGithubProfile };
